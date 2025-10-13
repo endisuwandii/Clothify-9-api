@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
@@ -10,16 +8,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model product {
-    id String @id @default(ulid())
+model Product {
+  id String @id @default(ulid())
 
-    name        String
-    imageUrl       String
-    price       Int
-    stock       Int
-    description String 
+  name     String
+  imageUrl String
 
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+  price       Int
+  stock       Int
+  description String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
-
