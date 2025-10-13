@@ -4,7 +4,7 @@
     "": {
       "name": "hono ",
       "dependencies": {
-        "@prisma/client": "^6.16.2",
+        "@prisma/client": "^6.16.3",
         "hono": "^4.9.5",
         "prisma": "^6.16.3",
       },
