@@ -4,7 +4,7 @@ import { db } from "./lib/db";
 const app = new Hono();
 
 app.get("/", (c) => {
-  return c.text("Welcome User!");
+  return c.text("Clothify API");
 });
 
 app.get("/products", async (c) => {
