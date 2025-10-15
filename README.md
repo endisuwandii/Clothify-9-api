@@ -1,6 +1,6 @@
-# Clothify-9-api
+# clothify-api
 
-Clothify-9-Backend API
+clothify-Backend API
 
 To install dependencies:
 
