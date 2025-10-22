@@ -1,6 +1,6 @@
 import { z } from "@hono/zod-openapi";
 
-export const ProductSchema = z.array(
+export const ProductSchema = z.object(
   z.object({
     id: z.string(),
     slug: z.string(),
