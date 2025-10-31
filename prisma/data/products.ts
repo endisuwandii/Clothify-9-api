@@ -46,6 +46,35 @@ export const dataProducts = [
     description: "Detail Produk : Bahan Combed 30,Kerah bulat,Sablon",
   },
 
+  {
+    slug: "russ-tshirt-truth-white",
+    name: "Kaos Russ Truth White",
+    imageUrl:
+      "https://www.russ.co.id/cdn/shop/products/rug-1641875143251-2_1200x.jpg?v=1739797054",
+    price: 104900,
+    stock: 10,
+    description: "Detail Produk : Bahan Combed 30,Kerah bulat,Sablon",
+  },
+  {
+    slug: "russ-tshirt-kaos-pria-chikara-white",
+    name: "Russ Tshirt Kaos Pria Chikara White",
+    imageUrl:
+      "https://www.russ.co.id/cdn/shop/products/rug-1647523572131-1_1200x.jpg?v=1739796881",
+    price: 104900,
+    stock: 10,
+    description: "Detail Produk : Bahan Combed 30,Kerah bulat,Sablon",
+  },
+
+  {
+    slug: "russ-tshirt-kaos-pria-staycation-white",
+    name: "Russ Tshirt Kaos Pria Staycation White",
+    imageUrl:
+      "https://www.russ.co.id/cdn/shop/products/rug-1646629445015-6_1200x.jpg?v=1739796943",
+    price: 10900,
+    stock: 5,
+    description: "Detail Produk : Bahan Combed 30,Kerah bulat,Sablon",
+  },
+
   // {
   //   slug: "",
   //   name: "",
