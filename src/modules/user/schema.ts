@@ -10,6 +10,9 @@ export const UserSchema = z.object({
 
 export const UsersSchema = z.array(UserSchema);
 
+export type User = z.infer<typeof UserSchema>;
+export type PrivateUser = z.infer<typeof PrivateUserSchema>;
+
 export const UserIdParamSchema = z.object({
   id: z.string(),
 });
@@ -26,3 +29,10 @@ export const RegisterUserSchema = z.object({
   fullName: z.string(),
   password: z.string(),
 });
+
+export const LoginUserSchema = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+
+export const TokenSchema = z.string();
