@@ -120,7 +120,6 @@ app.openapi(
   }
 );
 
-// GET POS
 app.openapi(
   createRoute({
     method: "post",
