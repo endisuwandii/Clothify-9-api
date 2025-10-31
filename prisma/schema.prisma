@@ -21,3 +21,28 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model User {
+  id String @id @default(ulid())
+
+  username String @unique
+  email    String @unique
+
+  fullName String?
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Password  Password?
+}
+
+model Password {
+  id String @id @default(ulid())
+
+  hash String
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
