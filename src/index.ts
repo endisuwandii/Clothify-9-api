@@ -10,9 +10,9 @@ import {
 } from "./modules/product/schema";
 import {
   RegisterUserSchema,
+  TokenSchema,
   UserIdParamSchema,
   UserSchema,
-  UsersSchema,
 } from "./modules/user/schema";
 
 const app = new OpenAPIHono();
