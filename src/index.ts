@@ -9,11 +9,14 @@ import {
   ProductsSchema,
 } from "./modules/product/schema";
 import {
+  LoginUserSchema,
   RegisterUserSchema,
   TokenSchema,
   UserIdParamSchema,
   UserSchema,
+  UsersSchema,
 } from "./modules/user/schema";
+import { signToken } from "./lib/token";
 
 const app = new OpenAPIHono();
 
@@ -72,7 +75,7 @@ app.openapi(
     responses: {
       200: {
         description: "Get all users",
-        content: { "application/json": { schema: UserSchema } },
+        content: { "application/json": { schema: UsersSchema } },
       },
     },
   }),
@@ -164,7 +167,7 @@ app.openapi(
     method: "post",
     path: "/auth/login",
     request: {
-      body: { content: { "application/json": { schema: UserSchema } } },
+      body: { content: { "application/json": { schema: LoginUserSchema } } },
     },
     responses: {
       200: {

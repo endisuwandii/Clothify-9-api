@@ -30,9 +30,10 @@ model User {
 
   fullName String?
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  Password  Password?
+  password Password?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Password {
@@ -40,7 +41,7 @@ model Password {
 
   hash String
 
-  userId String @unique
+  userId String @unique // Foreign Key
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
