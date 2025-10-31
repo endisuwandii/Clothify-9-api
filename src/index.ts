@@ -60,6 +60,7 @@ app.openapi(
   }
 );
 
+// Get all users
 app.openapi(
   createRoute({
     method: "get",
@@ -81,7 +82,7 @@ app.openapi(
     return c.json(users);
   }
 );
-
+// Get one user by ID
 app.openapi(
   createRoute({
     method: "get",
