@@ -164,7 +164,7 @@ app.openapi(
     method: "post",
     path: "/auth/login",
     request: {
-      body: { content: { "application/json": { schema: LoginUserSchema } } },
+      body: { content: { "application/json": { schema: UserSchema } } },
     },
     responses: {
       200: {
