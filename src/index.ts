@@ -8,7 +8,12 @@ import {
   ProductSchema,
   ProductsSchema,
 } from "./modules/product/schema";
-import { UserIdParamSchema, UsersSchema } from "./modules/user/schema";
+import {
+  RegisterUserSchema,
+  UserIdParamSchema,
+  UserSchema,
+  UsersSchema,
+} from "./modules/user/schema";
 
 const app = new OpenAPIHono();
 
@@ -60,7 +65,6 @@ app.openapi(
   }
 );
 
-// Get all users
 app.openapi(
   createRoute({
     method: "get",
@@ -68,7 +72,7 @@ app.openapi(
     responses: {
       200: {
         description: "Get all users",
-        content: { "application/json": { schema: UsersSchema } },
+        content: { "application/json": { schema: UserSchema } },
       },
     },
   }),
@@ -82,7 +86,7 @@ app.openapi(
     return c.json(users);
   }
 );
-// Get one user by ID
+
 app.openapi(
   createRoute({
     method: "get",
@@ -91,7 +95,7 @@ app.openapi(
     responses: {
       200: {
         description: "Get one user by ID",
-        content: { "application/json": { schema: UsersSchema } },
+        content: { "application/json": { schema: UserSchema } },
       },
       404: {
         description: "User by id not found",
@@ -113,6 +117,46 @@ app.openapi(
     }
 
     return c.json(user);
+  }
+);
+
+// GET POS
+app.openapi(
+  createRoute({
+    method: "post",
+    path: "/auth/register",
+    request: {
+      body: { content: { "application/json": { schema: RegisterUserSchema } } },
+    },
+    responses: {
+      201: {
+        description: "Registered new user",
+        content: { "application/json": { schema: UserSchema } },
+      },
+      400: {
+        description: "Failed to register new user",
+      },
+    },
+  }),
+  async (c) => {
+    const body = c.req.valid("json");
+
+    try {
+      const hash = await Bun.password.hash(body.password);
+
+      const user = await db.user.create({
+        data: {
+          username: body.username,
+          email: body.email,
+          fullName: body.fullName,
+          password: { create: { hash } },
+        },
+      });
+
+      return c.json(user, 201);
+    } catch (error) {
+      return c.json({ message: "Username or email already exist" }, 400);
+    }
   }
 );
 
