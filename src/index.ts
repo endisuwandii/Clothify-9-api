@@ -10,10 +10,13 @@ import {
 } from "./modules/product/schema";
 import {
   RegisterUserSchema,
+  LoginUserSchema,
   TokenSchema,
   UserIdParamSchema,
   UserSchema,
+  UsersSchema,
 } from "./modules/user/schema";
+import { signToken } from "./lib/token";
 
 const app = new OpenAPIHono();
 
@@ -86,7 +89,7 @@ app.openapi(
     return c.json(users);
   }
 );
-
+// GET User By ID
 app.openapi(
   createRoute({
     method: "get",
@@ -120,6 +123,7 @@ app.openapi(
   }
 );
 
+// Register User
 app.openapi(
   createRoute({
     method: "post",
@@ -130,7 +134,7 @@ app.openapi(
     responses: {
       201: {
         description: "Registered new user",
-        content: { "application/json": { schema: UserSchema } },
+        content: { "application/json": { schema: UsersSchema } },
       },
       400: {
         description: "Failed to register new user",
@@ -159,12 +163,13 @@ app.openapi(
   }
 );
 
+// Login User
 app.openapi(
   createRoute({
     method: "post",
     path: "/auth/login",
     request: {
-      body: { content: { "application/json": { schema: UserSchema } } },
+      body: { content: { "application/json": { schema: LoginUserSchema } } },
     },
     responses: {
       200: {
