@@ -75,7 +75,7 @@ app.openapi(
     responses: {
       200: {
         description: "Get all users",
-        content: { "application/json": { schema: UserSchema } },
+        content: { "application/json": { schema: UsersSchema } },
       },
     },
   }),
@@ -152,7 +152,7 @@ app.openapi(
           username: body.username,
           email: body.email,
           fullName: body.fullName,
-          password: { create: { hash } },
+          Password: { create: { hash } },
         },
       });
 
@@ -191,14 +191,14 @@ app.openapi(
       const user = await db.user.findUnique({
         where: { email: body.email },
         include: {
-          password: true,
+          Password: true,
         },
       });
       if (!user) {
         return c.notFound();
       }
 
-      if (!user.password?.hash) {
+      if (!user.Password?.hash) {
         return c.json({
           message: "User has no password",
         });
@@ -206,7 +206,7 @@ app.openapi(
 
       const isMatch = await Bun.password.verify(
         body.password,
-        user.password.hash
+        user.Password.hash
       );
 
       if (!isMatch) {
