@@ -152,7 +152,7 @@ app.openapi(
           username: body.username,
           email: body.email,
           fullName: body.fullName,
-          Password: { create: { hash } },
+          password: { create: { hash } },
         },
       });
 
@@ -191,14 +191,14 @@ app.openapi(
       const user = await db.user.findUnique({
         where: { email: body.email },
         include: {
-          Password: true,
+          password: true,
         },
       });
       if (!user) {
         return c.notFound();
       }
 
-      if (!user.Password?.hash) {
+      if (!user.password?.hash) {
         return c.json({
           message: "User has no password",
         });
@@ -206,7 +206,7 @@ app.openapi(
 
       const isMatch = await Bun.password.verify(
         body.password,
-        user.Password.hash
+        user.password.hash
       );
 
       if (!isMatch) {
