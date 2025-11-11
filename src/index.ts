@@ -15,8 +15,10 @@ import {
   UserIdParamSchema,
   UserSchema,
   UsersSchema,
+  PrivateUserSchema,
 } from "./modules/user/schema";
 import { signToken } from "./lib/token";
+import { checkAuthorized } from "./modules/auth/middleware";
 
 const app = new OpenAPIHono();
 
@@ -236,6 +238,42 @@ app.get(
   "/",
   Scalar({
     pageTitle: "Clohify API",
+    url: "/openapi.json",
+  })
+);
+
+// GET /auth/me
+app.openapi(
+  createRoute({
+    method: "get",
+    path: "/auth/me",
+    middleware: checkAuthorized,
+    responses: {
+      200: {
+        description: "Get authenticated user",
+        content: { "application/json": { schema: PrivateUserSchema } },
+      },
+    },
+  }),
+  async (c) => {
+    const user = c.get("user");
+
+    return c.json(user);
+  }
+);
+
+app.doc("/openapi.json", {
+  openapi: "3.0.0",
+  info: {
+    title: "Clothify API",
+    version: "1.0.0",
+  },
+});
+
+app.get(
+  "/",
+  Scalar({
+    pageTitle: "Clothify API",
     url: "/openapi.json",
   })
 );
